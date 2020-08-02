@@ -16,17 +16,14 @@ class App extends React.Component {
 
   }
 
-  fetchPets(URL) {
+  fetchPets = (URL='/api/pets') => {
     console.log(URL)
-    fetch(`${URL}`)
+    return fetch(`${URL}`)
     .then(response => response.json())
-    .then(data => {
-      console.log("data", data)
-      this.setState({pets: data})
-    })
+    .then(data => this.setState({ pets: data}))
   }
 
-  handleChange = event => {
+  onChangeType = event => {
     this.setState({
       filters: {
         ...this.state.filters,
@@ -41,13 +38,13 @@ class App extends React.Component {
     }else if (this.state.filters.type === 'dog') {
       return this.fetchPets('/api/pets?type=dog')
     }else if (this.state.filters.type === 'micropig') {
-      return this.fetchPets('/api/pets?type=micropigs')
+      return this.fetchPets('/api/pets?type=micropig')
     }
 
   }
 
-  onAdoptPet = () => {
-    
+  onAdoptPet = (id) => {
+
   }
 
   render() {
@@ -59,10 +56,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onFindPetsClick={this.fetchPets} onChangeType={this.handleChange}/>
+              <Filters onFindPetsClick={this.fetchPets} onChangeType={this.onChangeType}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser onAdoptPet={this.onAdoptPet}/>
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
