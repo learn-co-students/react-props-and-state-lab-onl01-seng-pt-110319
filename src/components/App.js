@@ -16,12 +16,25 @@ class App extends React.Component {
 
   }
 
-  fetchPets = (URL='/api/pets') => {
-    console.log(URL)
-    return fetch(`${URL}`)
+  fetchPets = () => {
+    
+    let url = '/api/pets'
+
+    if (this.state.filters.type === 'cat') {
+      url = '/api/pets?type=cat'
+    } else if (this.state.filters.type === 'dog') {
+      url = '/api/pets?type=dog'
+    }else if (this.state.filters.type === 'micropig') {
+      url = '/api/pets?type=micropig'
+    }
+    fetch(url)
     .then(response => response.json())
     .then(data => this.setState({ pets: data}))
+    console.log(url)
+
   }
+
+
 
   onChangeType = event => {
     this.setState({
@@ -31,19 +44,18 @@ class App extends React.Component {
       }
     })
 
-    if (this.state.filters.type === 'all') {
-      return this.fetchPets('/api/pets')
-    } else if (this.state.filters.type === 'cat') {
-      return this.fetchPets('/api/pets?type=cat')
-    }else if (this.state.filters.type === 'dog') {
-      return this.fetchPets('/api/pets?type=dog')
-    }else if (this.state.filters.type === 'micropig') {
-      return this.fetchPets('/api/pets?type=micropig')
-    }
+
 
   }
 
   onAdoptPet = (id) => {
+    let pets = this.state.pets.map(pet => {
+      if (pet.id === id) {
+        return {...pet, isAdopted: true}
+      }
+    })
+
+    this.setState({pets: pets})
 
   }
 
