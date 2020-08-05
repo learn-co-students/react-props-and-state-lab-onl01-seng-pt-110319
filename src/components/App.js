@@ -15,6 +15,43 @@ class App extends React.Component {
     }
   }
 
+  onAdoptPet = (petId) => {
+    const pets = this.state.pets.map(pet => {
+      return pet.id === petId ? {...pet, isAdopted: true} : pet
+    })
+    this.setState({
+      pets: pets 
+      //if key and value is same name we can just es6 syntax and write the name once(eg: { pets: pets }  becomes just { pets })
+    })
+  }
+
+  onChangeType = ({target: {value}}) => {
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        type: value
+      }
+    })
+  }
+
+  fetchPets = () => {
+    let url = '/api/pets'
+
+    if(this.state.filters.type !== 'all') {
+      url += `?type=${this.state.filters.type}`
+    }
+
+      fetch(url)
+        .then(resp=> resp.json())
+        .then(data =>  {
+          this.setState({
+            pets: data
+          }
+          )
+        }
+        )
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +61,13 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters 
+                onChangeType={this.onChangeType}
+                onFindPetsClick={this.fetchPets}
+              />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
