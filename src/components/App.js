@@ -15,10 +15,6 @@ class App extends React.Component {
     }
   }
 
-  OnChangeType = ({target: { value } }) => {
-    this.setState({ filters: { ...this.state.filters, type: value } })
-  }
-
   fetchPets = () => {
     let endpoint = '/api/pets'
 
@@ -29,6 +25,10 @@ class App extends React.Component {
     fetch(endpoint)
     .then(res => res.json())
     .then(pets => this.setState({ pets: pets }))
+  }
+
+  OnChangeType = ({target: { value } }) => {
+    this.setState({ filters: { ...this.state.filters, type: value } })
   }
 
   onAdoptPet = petId => {
@@ -62,3 +62,5 @@ class App extends React.Component {
 }
 
 export default App
+
+
