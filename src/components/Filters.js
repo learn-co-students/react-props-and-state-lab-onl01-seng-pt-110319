@@ -1,25 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react';
 
-class Filters extends React.Component {
-  render() {
-    return (
-      <div className="ui form">
-        <h3>Animal type</h3>
-        <div className="field">
-          <select name="type" id="type">
-            <option value="all">All</option>
-            <option value="cat">Cats</option>
-            <option value="dog">Dogs</option>
-            <option value="micropig">Micropigs</option>
+ class Filters extends Component{
+   render (){
+     return(
+       <form>
+         <h3>Pet Type</h3>
+          <select id="type">
+            <option value=""></option>
           </select>
-        </div>
 
-        <div className="field">
-          <button className="ui secondary button">Find pets</button>
-        </div>
-      </div>
-    )
-  }
-}
-
-export default Filters
+         <button type="submit">Find pets</button>
+       </form>
+       
+    
+     )
+   }
+ }
+  
+export default Filters;
