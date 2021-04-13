@@ -9,24 +9,29 @@ class App extends React.Component {
     this.state={
       pets:[],
       filters:{
-        type:""
+        type:"all"
       }
     }
   }
 
-  handleChange=(newType)=>{
+  changeType=(newType)=>{
     this.setState({
       filters: {
         ...this.state.filters,
-        type: newType
+        type: newType.target.value
       }
     })
+
   }
 
-  fetchPets=(filter)=>{
-    fetch(`api/pets/${filter}`)
+  fetchPets=()=>{
+    let base="/api/pets"
+    if(this.state.filters.type!=="all"){
+      base+=`?type=${this.state.filters.type}`
+    }
+    fetch(base)
     .then(response=> response.json())
-    .then(pets=> console.log(pets))
+    .then(pets=> this.setState({pets: pets}))
   }
 
   adoptPet=(id)=>{
@@ -36,8 +41,8 @@ class App extends React.Component {
 render(){
   return(
     <div>
-      <Filters onChangeType={this.handleChange}/>
-      <PetBrowser onFindPetsClick={this.fetchPets} onAdoptPet={this.adoptPet}/>
+      <Filters onFindPetsClick={this.fetchPets} onChangeType={this.changeType}/>
+      <PetBrowser onAdoptPet={this.adoptPet}/>
     </div>
   )
 }
