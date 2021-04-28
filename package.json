@@ -1,12 +1,12 @@
 {
   "name": "react-props-and-state-lab",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "fetch-mock": "^5.9.4",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
-    "react-scripts": "^3.3.0",
+    "react-scripts": "3.2.0",
     "react-test-renderer": "^16.0.0",
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.9.0"
@@ -23,7 +23,7 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "expect": "^21.2.1",
-    "react": "^16.0.0",
+    "react": "^16.13.1",
     "react-dom": "^16.3.3",
     "sinon": "^1.17.7",
     "whatwg-fetch": "^2.0.3"
@@ -47,5 +47,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "## Overview",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlumbo/react-props-and-state-lab-onl01-seng-pt-110319.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carlumbo/react-props-and-state-lab-onl01-seng-pt-110319/issues"
+  },
+  "homepage": "https://github.com/Carlumbo/react-props-and-state-lab-onl01-seng-pt-110319#readme"
 }
